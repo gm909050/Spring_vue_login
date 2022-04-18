@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="Chrome" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>夢想假期會員登入頁面 - DreamHoliday</title>
+
+<!-- <script
+	src="<%=request.getContextPath()%>/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="<%=request.getContextPath()%>/https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+div.card-header {
+	background: linear-gradient(#2B3078, #0AA6B7);
+	color: white;
+}
+
+div img.logo {
+	width: 40%;
+	margin: 0 auto;
+	display: block;
+}
+
+main {
+	margin: 50px auto;
+}
+
+div.card-footer {
+	margin: 5px;
+}
+
+div.text-center {
+	margin-top: 10px;
+}
+
+p.warn {
+	color: red;
+}
+
+footer {
+	background: linear-gradient(#0AA6B7, #2B3078);
+	width: 100%;
+	vertical-align: bottom;
+	text-align: center;
+}
+
+footer #logo2 {
+	width: 100vh;
+	display: inline-block;
+}
+
+footer div p {
+	display: inline-block;
+	font-size: 20px;
+	color: white;
+	margin: 10px 10px;
+	text-align: center;
+}
+
+footer div {
+	max-width: 1000px;
+	margin: 10px auto;
+	text-align: center;
+	position: relative;
+}
+
+footer div#sns {
+	display: inline-block;
+	position: relative;
+}
+
+footer img {
+	display: inline-block;
+	margin: 10px 10px;
+	vertical-align: bottom;
+}
+
+footer img.sns {
+	width: 50px;
+	height: 50px;
+}
+
+footer img.twitter {
+	width: 55px;
+	height: 50px;
+}
+
+footer img.fb {
+	width: 50px;
+	height: 50px;
+}
+
+footer img.yt {
+	width: 80px;
+	height: 50px;
+}
+
+div.main.row {
+	margin: 30px;
+	width: 100%;
+}
+
+div.main div {
+	margin: 20px;
+}
+
+div.main2 div {
+	margin: 20px;
+}
+
+div div img.card {
+	max-width: 500px;
+}
+
+div.main2 {
+	display: none;
+}
+div.rounded-lg{
+	height:auto;
+	border-radius:30px;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+	<div id="layoutAuthentication_content">
+		<main>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-7">
+						<div class="card shadow-lg border-0 rounded-lg mt-5">
+							<div class="card-header">
+								
+								<h3 class="text-center font-weight-light my-4">夢想假期登入註冊頁面</h3>
+								
+								<span class="" style="font-size:20px; margin-left: 220px;" >{{login}}</span>
+                                
+								<ul v-for="item in errormas" :key="key">
+                                    <li style="color: red">
+                                        {{item}}
+                                    </li>
+                                </ul>
+							</div>
+
+							<div class="container"> 
+								<div class="row"> 
+									<div class="col-md-6">
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control usermail " id="usermail"
+											
+												type="text" name="name"	style="margin:10px;" autofocus="off" v-model.trim="email"	@keyup.enter="longin()"								
+												placeholder="請輸入信箱" /> <label
+												for="inputFirstName">帳號</label>
+										</div>
+									</div>
+									
+									<div class="col-md-6 ">
+										<div class="form-floating mb-3 mb-md-0 " style="margin:auto">
+											<input class="form-control userpassword" id="userpassword"
+											
+												type="text" name="password"	style="margin:10px" v-model.trim="password" @keyup.enter="longin()"									
+												placeholder="密碼" /> 
+												<label for="inputFirstName">密碼</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+									<br>
+									<div class="row justify-content-center textred">
+										<input type="hidden" name="action" value="insert"> 
+										<input id="btn_login" class="btn loginemail btn-primary" style="margin:5px; width:400px;" @click="longin()" type="submit"value="登入">
+										
+										<input type="hidden" name="action" value="insert"> 
+										<input id="btn_password" style="margin:5px; width:400px;" class="btn  btn-primary" type="submit" @click="forgetpassword()" value="忘記密碼">
+
+										<input type="hidden" name="action" value="insert"> 
+										<input id="" style="margin:5px; width:400px;" class="btn btn-primary"  type="submit" @click="adduser()"value="註冊">
+
+										<input type="hidden" name="action" value="insert"> 
+										<input id="btn_logout" class="btn logout btn-primary" style="margin:5px; width:400px;" type="submit" @click="removeuser()" value="登出">
+
+										<input type="hidden" name="action" value="insert"> 
+										<input style="margin:5px; width:400px;" class="btn btn-primary"  type="submit" v-if="manage != null" @click="springUserTabel()" value="管理員介面">
+	
+								    </div>
+
+									<br>
+									<br>
+									<br>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	     </div>
+	   </main>
+	</div>
+
+	
+
+</div>
+
+	
+<!-- =====================新增========================== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.1.4/vue.global.min.js"></script>
+
+
+
+<script>
+
+						var manageuser = sessionStorage.getItem("manageuser");
+      					var tojsonmanage = JSON.parse(manageuser)
+					    var updatauser = sessionStorage.getItem("updatauser");
+      					var tojsonuser = JSON.parse(updatauser)
+
+						  
+
+        Vue.createApp({
+                data() {
+                    return {
+                      email:"",
+                      password:"",
+                      suremail : /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+                      errormas : [],
+					  login :""	,
+					  user : tojsonuser,
+					  manage : tojsonmanage	
+                    }
+                },
+                methods: {
+					getdata(){
+						if(tojsonmanage != null){
+							this.login = "管理員: "+ tojsonmanage.name + "您好"
+						}else if(tojsonuser!= null){
+							this.login = "會員: "+ tojsonuser.name + "您好"
+						}
+					},
+					//登入會員
+                    longin(){
+						var _this=this;
+						var manageuser = sessionStorage.getItem("manageuser");
+      					var tojsonmanage = JSON.parse(manageuser)
+					    var updatauser = sessionStorage.getItem("updatauser");
+      					var tojsonuser = JSON.parse(updatauser)
+
+						
+						if(tojsonmanage !=null || tojsonuser!=null){
+							alert("目前已登入 更換帳號請先登出")
+						}else if(this.email == ""){
+							alert("請輸入帳號-Email格式")
+					    }else if(this.password==""){
+							alert("請輸入密碼")
+					    }else if(!this.suremail.test(this.email)){
+                            alert("帳號格式不正確")
+							this.email=""
+							this.password=""
+                        }else{
+                            let text = {
+                                "email" : this.email,
+                                "password" : this.password   
+                            };
+                            $.ajax({
+                                url: "http://localhost:8080/springbootusers/loginemail",           // 資料請求的網址
+                                type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+                                data: text,               // 傳送資料到指定的 url
+                                dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+
+                                success: function(test){      // request 成功取得回應後執行  
+									_this.errormas=[]
+
+                                    if(test=="請確認帳號"){								
+                                        _this.errormas.push("查無使用者")
+                                        alert(_this.errormas) 
+										_this.email=""
+										_this.password=""
+                                    }else if(test=="請確認密碼"){
+										_this.errormas.push("請確認使用者密碼")
+                                        alert(_this.errormas)
+										_this.password=""
+                                    }else{
+										
+                                        if(test[0].id<=5){
+                                            // console.log(test[0])							
+                                            sessionStorage.setItem("manageuser",JSON.stringify(test[0]));	
+                                            
+                                            alert("管理員登入成功跳轉頁面");
+                                            location.href="springManageUpdata.html"
+                                        }else{
+                                            // console.log(test[0])							
+                                            sessionStorage.setItem("updatauser",JSON.stringify(test[0]));	
+                                            
+                                            alert("會員登入成功跳轉頁面");
+                                            location.href="springVueUpdata.html"
+                                        }
+                                        
+                                    }
+															
+				            	}
+				            });
+                        }
+                    },
+					//跳轉新增會員頁面
+					adduser(){
+						location.href="springVueAddUser.html"
+					},
+					//跳轉忘記密碼頁面
+					forgetpassword(){
+						location.href="springVueFprgetpassword.html"
+					},
+					//登出
+					removeuser(){
+						var manageuser = sessionStorage.getItem("manageuser");
+      					var tojsonmanage = JSON.parse(manageuser)
+					    var updatauser = sessionStorage.getItem("updatauser");
+      					var tojsonuser = JSON.parse(updatauser)
+
+
+						if(tojsonmanage==null && tojsonuser==null){
+							return
+						}else{
+							sessionStorage.removeItem("updatauser");
+							sessionStorage.removeItem("manageuser");
+							this.email=""
+							this.password=""
+							alert("已登出")
+							location.reload()
+						}
+					
+					},
+					springUserTabel(){
+						location.href="springUserTable.html"
+					}
+					
+                },
+                computed:{
+                        
+                        
+                },
+				mounted(){
+                    this.getdata();
+					// this.confim();
+        
+                }      
+				
+        }).mount('#app');
+</script>
+
+
+
+
+
+</body>
+</html>

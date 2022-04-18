@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夢想假期-首頁</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: linear-gradient(#2B3078, #0AA6B7);
+
+        }
+        a{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 3em;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            color: rgb(4, 15, 36); 
+            -webkit-box-reflect: below 1px linear-gradient(transparent ,rgb(218, 218, 218));
+            animation: san 6s linear infinite;
+        }
+        @keyframes san{
+            0%,15%,50%,52%,70%,90%,99.1%{
+                color: rgb(4, 15, 36);
+                filter: blur(2px);
+            }
+            12%,15.1%,60%,70.1%,90.5%,100%{
+                color: rgb(255, 255, 255);
+                text-shadow: 0 0 5px rgb(22, 138, 216),
+                0 0 25px rgb(22, 138, 216),
+                0 0 35px rgb(22, 138, 216),
+                0 0 105px rgb(22, 138, 216),
+                0 0 155px rgb(22, 138, 216);
+                filter: blur(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="test" href="#" style="cursor:hand">夢想假期 - DreamHoliday</a>
+
+    <script>
+
+        $(".test").on("click",function(){
+            location.href="springVueLogin.html"
+        })
+
+    </script>
+</body>
+</html>

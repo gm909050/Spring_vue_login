@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理員介面</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <link rel="stylesheet" htef="test.css">
+
+
+    <style>
+        #table_all{
+            display:none;
+        }
+    </style>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    div.card-header {
+        background: linear-gradient(#2B3078, #0AA6B7);
+        color: white;
+    }
+    
+    div img.logo {
+        width: 40%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    main {
+        margin: 50px auto;
+    }
+    
+    div.card-footer {
+        margin: 5px;
+    }
+    
+    div.text-center {
+        margin-top: 10px;
+    }
+    
+    p.warn {
+        color: red;
+    }
+    
+    footer {
+        background: linear-gradient(#0AA6B7, #2B3078);
+        width: 100%;
+        vertical-align: bottom;
+        text-align: center;
+    }
+    
+    footer #logo2 {
+        width: 100vh;
+        display: inline-block;
+    }
+    
+    footer div p {
+        display: inline-block;
+        font-size: 20px;
+        color: white;
+        margin: 10px 10px;
+        text-align: center;
+    }
+    
+    footer div {
+        max-width: 1000px;
+        margin: 10px auto;
+        text-align: center;
+        position: relative;
+    }
+    
+    footer div#sns {
+        display: inline-block;
+        position: relative;
+    }
+    
+    footer img {
+        display: inline-block;
+        margin: 10px 10px;
+        vertical-align: bottom;
+    }
+    
+    footer img.sns {
+        width: 50px;
+        height: 50px;
+    }
+    
+    footer img.twitter {
+        width: 55px;
+        height: 50px;
+    }
+    
+    footer img.fb {
+        width: 50px;
+        height: 50px;
+    }
+    
+    footer img.yt {
+        width: 80px;
+        height: 50px;
+    }
+    
+    div.main.row {
+        margin: 30px;
+        width: 100%;
+    }
+    
+    div.main div {
+        margin: 20px;
+    }
+    
+    div.main2 div {
+        margin: 20px;
+    }
+    
+    div div img.card {
+        max-width: 500px;
+    }
+    
+    div.main2 {
+        display: none;
+    }
+    div.rounded-lg{
+        height:auto;
+    }
+    button#btn_yes{
+        width: 100%;
+        margin: 10px;
+    }
+    #table_all{
+        margin: 20px auto;
+    }
+    </style>
+    </head>
+    <body>
+        <!-- <form class="form-horizontal" enctype="multipart/form-data"> -->
+            
+   
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    
+                                    <h3 class="text-center font-weight-light my-4">夢想假期管理員頁面</h3>
+    
+                                </div>
+    
+                                <div class="container"> 
+                                    <div class="row">
+                                        <div id="table_all">
+                                            <table id="table_id" class="display" style="width:100%"  >
+                                            </table>  
+                                        </div>
+                                    </div> 
+                                </div> 
+
+                                        <div class="container"> 
+                                            <div class="row">
+                                                    <div class="col-md-6">
+                                                        <button id="btn_yes" class="btn open btn-primary img-fluid d-block mx-auto">開啟</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button id="btn_yes" class="btn retruehome btn-primary img-fluid d-block mx-auto" >返回</button>  
+                                                    </div>                                     
+                                            </div> 
+                                        </div> 
+           
+                             </div>
+                        </div>
+                    </div>
+                </div>
+           </main>
+        </div>
+  
+
+<script>
+    $(document).ready( function () {
+        var updatauser = sessionStorage.getItem("manageuser");
+        var tojson = JSON.parse(updatauser)
+        if(tojson==null){
+            alert("沒登入 返回登入畫面")
+            location.href="springVueLogin.html"
+        }       
+
+       $(".open").on("click",function(){
+                    var updatauser = sessionStorage.getItem("manageuser");
+                    var tojson = JSON.parse(updatauser)
+
+       
+                    $.ajax({
+                            url: "http://localhost:8080/springbootusers/getlist",           // 資料請求的網址
+                            type: "GET",                  // GET | POST | PUT | DELETE | PATCH
+                            dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+
+                            success: function(test){      // request 成功取得回應後執行  
+                                if(test == null){
+                                    alert("資料傳輸失敗")
+                                }else{
+                                    $('#table_id').DataTable({
+                                        "lengthMenu": [ 5, 10, 15, 20],
+                                        data : test,
+                                        columns : [ 
+                                                        {data : "id",title:"員工Id"},
+                                                        {data : "name",title:"員工姓名"},
+                                                        {data : "age",title:"員工年齡"},
+                                                        {data : "email",title:"員工信箱(帳號)"},
+                                                        {data : "password",title:"密碼"},
+                                                        {data : null,title:"操作功能",
+                                                            render:function(data,type,row){
+                                                                // <button type="button"  class="btn btn-primary buttondelete btn-sm">刪除</button>
+                                                                return "&emsp;&emsp;&emsp;&emsp;"+'<button type="button"  id="buttonupdata" class="btn btn-primary updatauser btn-sm">更新</button>'
+                                                                +"&emsp;&emsp;"+'<button type="button"  class="btn btn-primary buttondelete btn-sm">刪除</button>'    
+                                                            }
+                                                        }
+                                                   ],
+                                                   rowCallback:RowCallback,
+                                            language : {
+                                            url: "zh_Hant.json" 
+                                        }
+                                    });
+                                   
+                                }			
+                            }
+                    });
+                     function RowCallback(row,data,index){
+                        // $(row).css("background-color","red")
+                        // $("td",row).eq(5).css("font-weight","bold").css("color","black")
+                    }
+                $("#table_all").attr("style","display:block")
+                $(".open").attr("style","display:none")
+                // $(".open").attr("class","retruehome")
+          });
+          $(".retruehome").on("click",function(){
+            location.href="springManageUpdata.html"
+          })
+// ========================================刪除=========================
+
+           
+            $(document).on('click', '.buttondelete', function () {
+                var row = $("#table_id tr").index($(this).closest("tr"));
+                var id = $("#table_id").find("tr").eq(row).find("td").eq(0).text();
+                    let text = {
+                        "userId":id
+                    };
+
+                $.ajax({
+                        url: "http://localhost:8080/springbootusers/delete",           // 資料請求的網址
+                        type: "GET",                  // GET | POST | PUT | DELETE | PATCH
+                        data: text,               // 傳送資料到指定的 url
+                        dataType: "text",             // 預期會接收到回傳資料的格式： json | xml | html
+
+                        success: function(test){      // request 成功取得回應後執行  
+                            alert("刪除成功重新整理頁面");
+                            location.reload()
+                                                                
+                        }
+                });
+            });
+          // ========================================刪除===================================================    
+        // =========================================更新=====================================================
+            $(document).on('click', '.updatauser', function () {
+                var row = $("#table_id tr").index($(this).closest("tr"));
+                var id = $("#table_id").find("tr").eq(row).find("td").eq(0).text();
+                var name = $("#table_id").find("tr").eq(row).find("td").eq(1).text();
+                var age = $("#table_id").find("tr").eq(row).find("td").eq(2).text();
+                var mail = $("#table_id").find("tr").eq(row).find("td").eq(3).text();
+                var password = $("#table_id").find("tr").eq(row).find("td").eq(4).text();
+                
+                    let user = {
+                        "id":id,
+                        "name" : name,
+                        "age" : age,
+                        "email" : mail,
+                        "password" : password
+                    };
+                    // alert(user)
+                    
+                    sessionStorage.setItem("updatauser",JSON.stringify(user));
+                    location.href="springVueUpdata.html"  
+            });
+
+        // =========================================更新=====================================================
+         
+    });
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
