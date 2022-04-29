@@ -13,9 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 public class mail {
 	
-//	public static void main(String []arms) {
-//		sendMail("gm909050@gmail.com","1121","212121");
-//	}
+
 	// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
 	public void sendMail(String to, String subject, String messageText) {
 System.out.println("=============================================");
@@ -31,8 +29,8 @@ System.out.println("=============================================");
 			// ●設定 gmail 的帳號 & 密碼 (將藉由你的Gmail來傳送Email)
 			// ●須將myGmail的【安全性較低的應用程式存取權】打開
 
-			final String myGmail = "st909050123@gmail.com";
-			final String myGmail_password = "gm909050";
+			final String myGmail = "st909050123";
+			final String myGmail_password = "g";
 			Session session = Session.getInstance(props, new Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(myGmail, myGmail_password);
